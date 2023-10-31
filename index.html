@@ -1,0 +1,101 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Trivia Train!</title>
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-T3c6CoIi6uLrA9TneNEoa7RxnatzjcDSCmG1MXxSR1GAsXEV/Dwwykc2MPK8M2HN" crossorigin="anonymous">
+</head>
+<body>
+
+    <main>
+
+      <!-- Splash Screen -->
+      <div class="container py-5 mx-auto" id="splashscreen">
+        <!-- header row-->
+        <div class="row">
+          <div class="text-center h2">
+            Trivia Train!
+          </div>
+        </div>
+        <div class="row">
+          <div class="col text-center">All aboard the trivia train!<br>Race against time, answer fast! <br>Build your streak, but one wrong turn and back to the start!</div>
+        </div>
+        <div class="row m-5">
+          <div class="text-center"> <!-- center the button not stretched across the screen  -->
+            <div type="button" class="btn btn-primary btn-sm" id="startbutton">Let's Play!</div>
+          </div>
+        </div>
+      </div>
+
+      <!-- Between rounds screen -->
+      <div class="container py-5 mx-auto d-none" id="betweenrounds">
+        <!-- header row-->
+        <div class="row">
+          <div class="text-center h2" id="betweenroundsheader">
+            Have fun!
+          </div>
+        </div>
+        <div class="row">
+          <div class="col text-center" id="dyanmicbetweentext">Get ready for the first question!</div>
+        </div>
+        <div class="row m-5">
+          <div class="text-center"> <!-- center the button not stretched across the screen  -->
+            <div class="col text-center" id="betweenroundscountdown">5</div>
+          </div>
+        </div>
+      </div>
+
+
+
+      <!-- Want to Play Again? -->
+      <div class="container py-5 d-none" id="lostscreen">
+        <!-- header row-->
+        <div class="row">
+          <div class="text-center h2">
+            Ah bummer...
+          </div>
+        </div>
+        <!-- Question Row-->
+        <div class="row">
+          <div class="col text-center">Sorry you lost... want to play again?</div>
+        </div>
+        <div class="row m-5">
+          <div class="text-center"> <!-- center the button not stretched across the screen  -->
+            <div type="button" class="btn btn-primary btn-sm" id="restartbutton">Let's Play Again!</div>
+          </div>
+        </div>
+      </div>
+
+      <div class="container py-5 col-lg-6 col-12 d-none" id="gamecontainer">
+        <!-- header row-->
+        <div class="row">
+          <div class="col text-center" id="score"></div>
+          <div class="col-6 text-center h2">
+            Trivia Train!
+          </div>
+          <div class="col text-center" id="countdown">0</div>
+        </div>
+        <!-- Question Row-->
+        <div class="row">
+          <div class="col text-center" id="question">blank</div>
+        </div>
+          <!-- Explanation -->
+        <div class="row">
+          <div class="col text-center h5" id="result"></div>
+        </div>
+          <!-- Answers-->
+        <div class="row m-2">
+            <div type="button" class="col btn btn-primary m-2" id="answer1">blank</div>
+            <div type="button" class="col btn btn-primary m-2" id="answer2">blank</div>
+            <div class="w-100"></div>
+            <div type="button" class="col btn btn-primary m-2" id="answer3">blank</div>
+            <div type="button" class="col btn btn-primary m-2" id="answer4">blank</div>
+        </div>
+      </div>
+    </main>
+
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/js/bootstrap.bundle.min.js" integrity="sha384-C6RzsynM9kWDrMNeT87bh95OGNyZPhcTNXj1NW7RuBCsyN/o0jlpcV8Qyq46cDfL" crossorigin="anonymous"></script>
+    <script src="js/main.js"></script>
+</body>
+</html>

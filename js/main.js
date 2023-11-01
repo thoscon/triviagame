@@ -1,72 +1,18 @@
-
-// Example of an object
-let question1 = {
-    text: "According to the nursery rhyme, what fruit did Little Jack Horner pull out of his Christmas pie?",
-    answer1: {
-        text: 'Plum',
-        correct: true,},
-    answer2: {
-        text: 'Apple',
-        correct: false,},
-    answer3: {
-        text: 'Peach',
-        correct: false,},
-    answer4: {
-        text: 'Pear',
-        correct: false,},
-    shown: false,
-};
-
-let question2 = {
-    text: "What caused the titular mascot of Yo-Kai Watch, Jibanyan, to become a yokai?",
-    answer1: {
-        text: 'Ate one too many chocobars',
-        correct: false,},
-    answer2: {
-        text: 'Through a magical ritual',
-        correct: false,},
-    answer3: {
-        text: 'When he put on the harmaki',
-        correct: false,},
-    answer4: {
-        text: 'Being run over by a trucker',
-        correct: true,},
-    shown: false,
-};
-
-
-let question3 = {
-    text: "Who directed the Kill Bill movies?",
-    answer1: {
-        text: 'Arnold Schwarzenegger',
-        correct: false,},
-    answer2: {
-        text: 'Quentin Tarantino',
-        correct: true,},
-    answer3: {
-        text: 'David Lean',
-        correct: false,},
-    answer4: {
-        text: 'Stanley Kubrick',
-        correct: false,},
-    shown: false,
-};
-
-
-var allQuestions = [question1, question2, question3];
-
-
 // Globals
 let gameState = null;
 let correctAnswer = null;
 let currentQuestion = null;
+let answerText = null;
 let roundCountdown = 10;
 let betweenRound = 3;
 let roundTimer = 10;
 let nextRoundTimer = 3;
 let score = 0;
 let rightAnswer = 2; //setting to 2 because 1 is right 0 is wrong
-
+let phrases = ["Alright let's go!","Game time!","Let's do this!","Ready or not!",
+"Here we go!","Bring it on!","Go for it!","All in!","Up and at 'em!","You got this!",
+"Just do it!","No fear, no limits!","Feel the fire!","Time to shine!","Dream big!",
+"Stay gold!","Make it count!","Full speed ahead!","Keep it up!","Rise and shine!"];
 var startgame = document.getElementById("startbutton");
 
 //INITIAL PAGE LOAD
@@ -79,7 +25,6 @@ function onPageLoad() {
 window.onload = onPageLoad;
 
 function game(){
-    console.log(gameState);
     switch (gameState) {
         case "initial":
             break;
@@ -114,7 +59,7 @@ function game(){
             var betweenroundsscreen = document.getElementById("betweenrounds");
             betweenroundsscreen.classList.remove("d-none");
             document.getElementById("betweenroundscountdown").innerText = nextRoundTimer;
-            document.getElementById("score").innerHTML = score;
+            document.getElementById("score").innerHTML = "score: " + score;
 
             //update the timer
             nextRoundTimer --;   
@@ -128,10 +73,17 @@ function game(){
             ////////////////////////////////////////////////
             //update 
             ////////////////////////////////////////////////
+            //if the screen displayed first time set the phrase to show
+            if (nextRoundTimer === betweenRound){
+                currentPhrase = phrases[Math.floor(Math.random() * phrases.length)];
+                document.getElementById("betweenroundsheader").innerText = currentPhrase;   
+                document.getElementById("dyanmicbetweentext").innerText = "Get ready for the next question!"; 
+            }
+
             //if there is still time left on the nextroundtimer, just subtract 1
             if (nextRoundTimer - 1 > 0){
-                //nothing
-            }
+            //select a new phrase at random each screen
+             }
             else{
                 //set the countdown to roundCountdown (the config for a new round)
                 roundTimer = roundCountdown;
@@ -141,8 +93,7 @@ function game(){
                 updateQuestion(); //get a new question
             }
             
-            document.getElementById("betweenroundsheader").innerText = "Cool!";   
-            document.getElementById("dyanmicbetweentext").innerText = "Get ready for the next question!";   
+
             
 
 
@@ -176,13 +127,13 @@ function game(){
             }
 
             if (rightAnswer == 1){
-                updateMessage('Yes, you got it!', 'green');
+                updateMessage('Yes! You got it!', 'green');
                 gameState = "nextround";
                 nextRoundTimer = betweenRound;
 
             }
             else if (rightAnswer == 0){
-                updateMessage('Oh no... wrong', 'red');
+                updateMessage('Oh no... wrong. It was ' + answerText, 'red');
                 gameState = "gameover";
             }
             ////////////////////////////////////////////////
@@ -190,7 +141,7 @@ function game(){
             ////////////////////////////////////////////////
             //hide the next round screen 
             //draw the countdown
-            document.getElementById("countdown").innerText = roundTimer;    
+            document.getElementById("countdown").innerText = "Time: " + roundTimer;    
 
             //draw the question
             document.getElementById("question").innerText = currentQuestion.text;
@@ -200,7 +151,7 @@ function game(){
             document.getElementById("answer2").innerText = currentQuestion.answer2.text;
             document.getElementById("answer3").innerText = currentQuestion.answer3.text;
             document.getElementById("answer4").innerText = currentQuestion.answer4.text;
-            document.getElementById("score").innerHTML = score;
+            document.getElementById("score").innerHTML = "Score: " + score;
 
             var betweenroundsscreen = document.getElementById("betweenrounds");
             betweenroundsscreen.classList.add("d-none");
@@ -238,16 +189,20 @@ function updateQuestion(){
     resetAllStyles();
     // set the correct answer
     if (currentQuestion.answer1.correct === true){
-        correctAnswer = 1
+        correctAnswer = 1;
+        answerText = currentQuestion.answer1.textl;
     }
     else if (currentQuestion.answer2.correct === true){
-        correctAnswer = 2
+        correctAnswer = 2;
+        answerText = currentQuestion.answer2.text;
     }
     else if (currentQuestion.answer3.correct === true){
-        correctAnswer = 3
+        correctAnswer = 3;
+        answerText = currentQuestion.answer3.text;
     }
     else{
-        correctAnswer = 4
+        correctAnswer = 4;
+        answerText = currentQuestion.answer4.text;
     }
 }
 
